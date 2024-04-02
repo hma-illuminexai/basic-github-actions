@@ -10,6 +10,10 @@ jobs:
   test:
     
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: core
         
     strategy:
       matrix:
@@ -19,15 +23,13 @@ jobs:
     steps:
     - name: Checkout files
       uses: actions/checkout@v3
-
-    - name: Change directory to core
-      run: cd core
     
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: core/package-lock.json
 
     - name: Do a clean install of dependencies
       run: npm ci

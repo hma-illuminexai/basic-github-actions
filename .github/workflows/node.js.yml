@@ -1,9 +1,5 @@
 name: Node.js CI
 
-defaults:
-  run:
-    working-directory: core
-
 on:
   push:
     branches: [ "main" ]
@@ -11,10 +7,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  test:
+    
     runs-on: ubuntu-latest
-
+    
+    defaults:
+      run:
+        working-directory: core
+        
     strategy:
       matrix:
         node-version: [20.x]
